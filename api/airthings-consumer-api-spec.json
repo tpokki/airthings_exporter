@@ -1,0 +1,1293 @@
+{
+    "openapi": "3.1.0",
+    "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
+    "info": {
+        "title": "Airthings API",
+        "version": "v1",
+        "contact": {
+            "name": "Airthings Support",
+            "email": "support@airthings.com"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://ext-api.airthings.com"
+        }
+    ],
+    "paths": {
+        "/v1/devices": {
+            "get": {
+                "tags": [
+                    "Devices"
+                ],
+                "summary": "Device list",
+                "description": "Get account devices",
+                "parameters": [
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of devices",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetDevicesResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "AirthingsAccounts": [
+                            "read:device:current_values"
+                        ]
+                    }
+                ]
+            },
+            "parameters": [
+            ]
+        },
+        "/v1/devices/{serialNumber}": {
+            "get": {
+                "tags": [
+                    "Devices"
+                ],
+                "summary": "Device info",
+                "description": "Get info about a specific device",
+                "parameters": [
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Device with sensors, segments and locations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetDeviceDetailedResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "AirthingsAccounts": [
+                            "read:device:current_values"
+                        ]
+                    }
+                ]
+            },
+            "parameters": [
+                {
+                    "name": "serialNumber",
+                    "in": "path",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "required": true,
+                    "deprecated": false
+                }
+            ]
+        },
+        "/v1/locations": {
+            "get": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Location list",
+                "description": "Get all locations",
+                "parameters": [
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of locations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetLocationsResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "AirthingsAccounts": [
+                            "read:device:current_values"
+                        ]
+                    }
+                ]
+            },
+            "parameters": [
+            ]
+        },
+        "/v1/locations/{locationId}": {
+            "get": {
+                "tags": [
+                    "Locations"
+                ],
+                "summary": "Location info",
+                "description": "Get info about a specific location",
+                "parameters": [
+                    {
+                        "name": "locationId",
+                        "in": "path",
+                        "schema": {
+                            "type": "string",
+                            "format": "uuid"
+                        },
+                        "required": true,
+                        "deprecated": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Location info",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetLocationResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false,
+                "security": [
+                    {
+                        "AirthingsAccounts": [
+                            "read:device:current_values"
+                        ]
+                    }
+                ]
+            },
+            "parameters": [
+            ]
+        }
+    },
+    "webhooks": {
+    },
+    "components": {
+        "schemas": {
+            "HookId": {
+                "type": "string",
+                "format": "uuid"
+            },
+            "LocationId": {
+                "type": "string",
+                "format": "uuid"
+            },
+            "OrganizationId": {
+                "type": "string",
+                "format": "uuid"
+            },
+            "SegmentId": {
+                "type": "string",
+                "format": "uuid"
+            },
+            "SegmentGroupId": {
+                "type": "string",
+                "format": "uuid"
+            },
+            "UserId": {
+                "type": "string",
+                "format": "uuid"
+            },
+            "UserGroupId": {
+                "type": "string",
+                "format": "uuid"
+            },
+            "LocalTime": {
+                "type": "string",
+                "format": "time"
+            },
+            "LocalDateTime": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "ZoneOffset": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "ZonedDateTime": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "SensorType": {
+                "type": "string",
+                "enum": [
+                    "radonShortTermAvg",
+                    "radonLongTermAvg",
+                    "temp",
+                    "outdoorTemp",
+                    "humidity",
+                    "outdoorHumidity",
+                    "co2",
+                    "voc",
+                    "pressure",
+                    "outdoorPressure",
+                    "pressureDifference",
+                    "pressureDiffStdDev",
+                    "pressureDiffMin",
+                    "pressureDiffMax",
+                    "light",
+                    "lux",
+                    "batteryPercentage",
+                    "batteryVoltage",
+                    "orientation",
+                    "pm1",
+                    "outdoorPm1",
+                    "pm25",
+                    "outdoorPm25",
+                    "pm10",
+                    "outdoorPm10",
+                    "mold",
+                    "staleAir",
+                    "transmissionEfficiency",
+                    "virusSurvivalRate",
+                    "virusRisk",
+                    "windSpeed",
+                    "windDirection",
+                    "windGust",
+                    "dewPoint",
+                    "cloudCover",
+                    "visibility",
+                    "precipitation_probability",
+                    "total_precipitation",
+                    "outdoorWeather",
+                    "hourlyRadonStandardDeviation",
+                    "hourlyRadon",
+                    "energyWastage",
+                    "energyScenarios",
+                    "historicVentilationConfidence",
+                    "daytimeBaseline",
+                    "daytimePeak",
+                    "nightBaseline",
+                    "historicVentilation",
+                    "ventilationRunningConfidence",
+                    "occupantsUpper",
+                    "occupantsLower",
+                    "occupants",
+                    "relativeOccupants",
+                    "ventilationAmount",
+                    "historicVentilationRunning",
+                    "ventilationRunning",
+                    "relativeVentilationRate",
+                    "aggregated",
+                    "sla",
+                    "pressureAtMinHeight",
+                    "pressureAtMaxHeight",
+                    "regulationPressure",
+                    "regulationHeight",
+                    "zeroPressureHeight",
+                    "totalPowerLost",
+                    "moistGuard",
+                    "potentialPowerSaved",
+                    "potentialPowerSavedPercent",
+                    "zeroHeightPercent",
+                    "zone",
+                    "controlSignal",
+                    "controlStatus",
+                    "returnState",
+                    "appliedGain",
+                    "lastBestControlSignal",
+                    "lastBestSignalError",
+                    "lastBestControlSignalGain",
+                    "lastBestControlSignalRecorded",
+                    "messages",
+                    "balanceControl",
+                    "controlSignalSlot01",
+                    "controlSignalSlot02",
+                    "controlSignalSlot03",
+                    "controlSignalSlot04",
+                    "controlSignalSlot05",
+                    "controlSignalSlot06",
+                    "controlSignalSlot07",
+                    "controlSignalSlot08",
+                    "inletAirControl",
+                    "powerVoltage",
+                    "rsrp",
+                    "ventController",
+                    "subsamplesCount",
+                    "subsamples",
+                    "balanceInfo",
+                    "outdoorNo2",
+                    "outdoorO3",
+                    "outdoorSo2",
+                    "outdoorCo",
+                    "outdoorNo",
+                    "airly",
+                    "airlyNo2",
+                    "airlyCo",
+                    "airlyNo",
+                    "bacnet"
+                ]
+            },
+            "HookSensorUnits": {
+                "type": "object",
+                "format": "string",
+                "properties": {
+                    "radonUnit": {
+                        "type": "string",
+                        "enum": [
+                            "pci",
+                            "bq"
+                        ]
+                    },
+                    "tempUnit": {
+                        "type": "string",
+                        "enum": [
+                            "c",
+                            "f"
+                        ]
+                    },
+                    "pressureUnit": {
+                        "type": "string",
+                        "enum": [
+                            "mbar",
+                            "pa",
+                            "hpa",
+                            "inhg"
+                        ]
+                    },
+                    "vocUnit": {
+                        "type": "string",
+                        "enum": [
+                            "ppb",
+                            "mgpc"
+                        ]
+                    }
+                }
+            },
+            "Map-Day-LocationUsage": {
+                "type": "object",
+                "format": "UsageHours",
+                "properties": {
+                    "monday": {
+                        "type": "object",
+                        "format": "LocationUsage",
+                        "properties": {
+                            "from": {
+                                "oneOf": [
+                                    {
+                                        "type": "null"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "format": "time"
+                                    }
+                                ]
+                            },
+                            "to": {
+                                "oneOf": [
+                                    {
+                                        "type": "null"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "format": "time"
+                                    }
+                                ]
+                            },
+                            "closed": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "tuesday": {
+                        "type": "object",
+                        "format": "LocationUsage",
+                        "properties": {
+                            "from": {
+                                "oneOf": [
+                                    {
+                                        "type": "null"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "format": "time"
+                                    }
+                                ]
+                            },
+                            "to": {
+                                "oneOf": [
+                                    {
+                                        "type": "null"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "format": "time"
+                                    }
+                                ]
+                            },
+                            "closed": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "wednesday": {
+                        "type": "object",
+                        "format": "LocationUsage",
+                        "properties": {
+                            "from": {
+                                "oneOf": [
+                                    {
+                                        "type": "null"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "format": "time"
+                                    }
+                                ]
+                            },
+                            "to": {
+                                "oneOf": [
+                                    {
+                                        "type": "null"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "format": "time"
+                                    }
+                                ]
+                            },
+                            "closed": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "thursday": {
+                        "type": "object",
+                        "format": "LocationUsage",
+                        "properties": {
+                            "from": {
+                                "oneOf": [
+                                    {
+                                        "type": "null"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "format": "time"
+                                    }
+                                ]
+                            },
+                            "to": {
+                                "oneOf": [
+                                    {
+                                        "type": "null"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "format": "time"
+                                    }
+                                ]
+                            },
+                            "closed": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "friday": {
+                        "type": "object",
+                        "format": "LocationUsage",
+                        "properties": {
+                            "from": {
+                                "oneOf": [
+                                    {
+                                        "type": "null"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "format": "time"
+                                    }
+                                ]
+                            },
+                            "to": {
+                                "oneOf": [
+                                    {
+                                        "type": "null"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "format": "time"
+                                    }
+                                ]
+                            },
+                            "closed": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "saturday": {
+                        "type": "object",
+                        "format": "LocationUsage",
+                        "properties": {
+                            "from": {
+                                "oneOf": [
+                                    {
+                                        "type": "null"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "format": "time"
+                                    }
+                                ]
+                            },
+                            "to": {
+                                "oneOf": [
+                                    {
+                                        "type": "null"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "format": "time"
+                                    }
+                                ]
+                            },
+                            "closed": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "sunday": {
+                        "type": "object",
+                        "format": "LocationUsage",
+                        "properties": {
+                            "from": {
+                                "oneOf": [
+                                    {
+                                        "type": "null"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "format": "time"
+                                    }
+                                ]
+                            },
+                            "to": {
+                                "oneOf": [
+                                    {
+                                        "type": "null"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "format": "time"
+                                    }
+                                ]
+                            },
+                            "closed": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                }
+            },
+            "ErrorResponse": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "$ref": "#/components/schemas/Code"
+                    },
+                    "error_code": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "type": "number",
+                                "format": "int32"
+                            }
+                        ]
+                    },
+                    "error_description": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "error",
+                    "error_description"
+                ]
+            },
+            "Code": {
+                "type": "string",
+                "enum": [
+                    "invalid_request",
+                    "invalid_request_clients_limit_exceeded",
+                    "access_denied",
+                    "invalid_parameter",
+                    "not_found",
+                    "internal_server_error",
+                    "device_invalid_check_code",
+                    "device_mac_not_found",
+                    "device_imei_not_found",
+                    "location_not_found",
+                    "segment_does_not_belong_to_user",
+                    "webhook_does_not_belong_to_user",
+                    "no_access_to_resource",
+                    "max_number_of_webhooks",
+                    "missing_location_properties_for_report",
+                    "access_denied_device_does_not_belong_to_user",
+                    "access_denied_location_does_not_belong_to_user",
+                    "radio_region_is_not_supported",
+                    "max_number_of_devices_reached"
+                ]
+            },
+            "GetDevicesResponse": {
+                "type": "object",
+                "properties": {
+                    "devices": {
+                        "items": {
+                            "$ref": "#/components/schemas/GetDeviceDetailedResponse"
+                        },
+                        "type": "array"
+                    },
+                    "limit": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "type": "number",
+                                "format": "int32"
+                            }
+                        ]
+                    },
+                    "offset": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "type": "number",
+                                "format": "int32"
+                            }
+                        ]
+                    },
+                    "total": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "type": "number",
+                                "format": "int32"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "devices"
+                ]
+            },
+            "GetDeviceDetailedResponse": {
+                "type": "object",
+                "properties": {
+                    "deviceType": {
+                        "$ref": "#/components/schemas/DeviceType"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "$ref": "#/components/schemas/LocationSimpleResponse"
+                            }
+                        ]
+                    },
+                    "productName": {
+                        "type": "string"
+                    },
+                    "segment": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "$ref": "#/components/schemas/SegmentSimpleResponse"
+                            }
+                        ]
+                    },
+                    "sensors": {
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "radonShortTermAvg",
+                                "radonLongTermAvg",
+                                "temp",
+                                "outdoorTemp",
+                                "humidity",
+                                "outdoorHumidity",
+                                "co2",
+                                "voc",
+                                "pressure",
+                                "outdoorPressure",
+                                "pressureDifference",
+                                "pressureDiffStdDev",
+                                "pressureDiffMin",
+                                "pressureDiffMax",
+                                "light",
+                                "lux",
+                                "batteryPercentage",
+                                "batteryVoltage",
+                                "orientation",
+                                "pm1",
+                                "outdoorPm1",
+                                "pm25",
+                                "outdoorPm25",
+                                "pm10",
+                                "outdoorPm10",
+                                "mold",
+                                "staleAir",
+                                "transmissionEfficiency",
+                                "virusSurvivalRate",
+                                "virusRisk",
+                                "windSpeed",
+                                "windDirection",
+                                "windGust",
+                                "dewPoint",
+                                "cloudCover",
+                                "visibility",
+                                "precipitation_probability",
+                                "total_precipitation",
+                                "outdoorWeather",
+                                "hourlyRadonStandardDeviation",
+                                "hourlyRadon",
+                                "energyWastage",
+                                "energyScenarios",
+                                "historicVentilationConfidence",
+                                "daytimeBaseline",
+                                "daytimePeak",
+                                "nightBaseline",
+                                "historicVentilation",
+                                "ventilationRunningConfidence",
+                                "occupantsUpper",
+                                "occupantsLower",
+                                "occupants",
+                                "relativeOccupants",
+                                "ventilationAmount",
+                                "historicVentilationRunning",
+                                "ventilationRunning",
+                                "relativeVentilationRate",
+                                "aggregated",
+                                "sla",
+                                "pressureAtMinHeight",
+                                "pressureAtMaxHeight",
+                                "regulationPressure",
+                                "regulationHeight",
+                                "zeroPressureHeight",
+                                "totalPowerLost",
+                                "moistGuard",
+                                "potentialPowerSaved",
+                                "potentialPowerSavedPercent",
+                                "zeroHeightPercent",
+                                "zone",
+                                "controlSignal",
+                                "controlStatus",
+                                "returnState",
+                                "appliedGain",
+                                "lastBestControlSignal",
+                                "lastBestSignalError",
+                                "lastBestControlSignalGain",
+                                "lastBestControlSignalRecorded",
+                                "messages",
+                                "balanceControl",
+                                "controlSignalSlot01",
+                                "controlSignalSlot02",
+                                "controlSignalSlot03",
+                                "controlSignalSlot04",
+                                "controlSignalSlot05",
+                                "controlSignalSlot06",
+                                "controlSignalSlot07",
+                                "controlSignalSlot08",
+                                "inletAirControl",
+                                "powerVoltage",
+                                "rsrp",
+                                "ventController",
+                                "subsamplesCount",
+                                "subsamples",
+                                "balanceInfo",
+                                "outdoorNo2",
+                                "outdoorO3",
+                                "outdoorSo2",
+                                "outdoorCo",
+                                "outdoorNo",
+                                "airly",
+                                "airlyNo2",
+                                "airlyCo",
+                                "airlyNo",
+                                "bacnet"
+                            ]
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "deviceType",
+                    "id",
+                    "productName",
+                    "sensors"
+                ]
+            },
+            "DeviceType": {
+                "type": "string",
+                "enum": [
+                    "WAVE",
+                    "WAVE_MIST",
+                    "WAVE_GEN2",
+                    "WAVE_MINI",
+                    "WAVE_PLUS",
+                    "WAVE_CO2",
+                    "VIEW_PLUS",
+                    "VIEW_PLUS_BUSINESS",
+                    "VIEW_POLLUTION",
+                    "VIEW_RADON",
+                    "VIEW_CO2",
+                    "SPACE_CO2_MINI",
+                    "WAVE_ENHANCE",
+                    "HUB",
+                    "HOME",
+                    "PRO",
+                    "CLOUDBERRY",
+                    "AIRTIGHT",
+                    "AGGREGATED_GROUP",
+                    "ZONE_GROUP",
+                    "BALANCE_CONTROL",
+                    "INLET_AIR_CONTROL",
+                    "VENT_CONTROLLER",
+                    "AIRLY",
+                    "AIRLY_NO2",
+                    "AIRLY_CO",
+                    "AIRLY_NO",
+                    "BREEZOMETER_WEATHER",
+                    "BACNET",
+                    "UNKNOWN"
+                ]
+            },
+            "LocationSimpleResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "name"
+                ]
+            },
+            "SegmentSimpleResponse": {
+                "type": "object",
+                "properties": {
+                    "active": {
+                        "type": "boolean"
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "started": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                },
+                "required": [
+                    "active",
+                    "id",
+                    "name",
+                    "started"
+                ]
+            },
+            "GetLocationsResponse": {
+                "type": "object",
+                "properties": {
+                    "locations": {
+                        "items": {
+                            "$ref": "#/components/schemas/Location"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "locations"
+                ]
+            },
+            "Location": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "labels": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "labels",
+                    "name"
+                ]
+            },
+            "BuildingType": {
+                "type": "string",
+                "enum": [
+                    "SCHOOL",
+                    "RESIDENTIAL",
+                    "APARTMENT",
+                    "KINDERGARTEN",
+                    "HEALTHCENTER",
+                    "OFFICE",
+                    "OTHER"
+                ]
+            },
+            "VentilationType": {
+                "type": "string",
+                "enum": [
+                    "NATURAL",
+                    "MECHANICAL",
+                    "BALANCED"
+                ]
+            },
+            "GetLocationResponse": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "buildingHeight": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "type": "number",
+                                "format": "float"
+                            }
+                        ]
+                    },
+                    "buildingSize": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "type": "number",
+                                "format": "float"
+                            }
+                        ]
+                    },
+                    "buildingType": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "$ref": "#/components/schemas/BuildingType"
+                            }
+                        ]
+                    },
+                    "buildingVolume": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "type": "number",
+                                "format": "float"
+                            }
+                        ]
+                    },
+                    "buildingYear": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "type": "number",
+                                "format": "int32"
+                            }
+                        ]
+                    },
+                    "countryCode": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "devices": {
+                        "items": {
+                            "$ref": "#/components/schemas/DeviceSimpleResponse"
+                        },
+                        "type": "array"
+                    },
+                    "floors": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "type": "number",
+                                "format": "int32"
+                            }
+                        ]
+                    },
+                    "id": {
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "labels": {
+                        "additionalProperties": {
+                            "type": "string"
+                        },
+                        "type": "object"
+                    },
+                    "lat": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "lng": {
+                        "type": "number",
+                        "format": "float"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "timezone": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "usageHours": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "$ref": "#/components/schemas/Map-Day-LocationUsage"
+                            }
+                        ]
+                    },
+                    "ventilationType": {
+                        "oneOf": [
+                            {
+                                "type": "null"
+                            },
+                            {
+                                "$ref": "#/components/schemas/VentilationType"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "devices",
+                    "id",
+                    "labels",
+                    "lat",
+                    "lng",
+                    "name"
+                ]
+            },
+            "DeviceSimpleResponse": {
+                "type": "object",
+                "properties": {
+                    "deviceType": {
+                        "$ref": "#/components/schemas/DeviceType"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "productName": {
+                        "type": "string"
+                    },
+                    "segment": {
+                        "$ref": "#/components/schemas/SegmentSimpleResponse"
+                    }
+                },
+                "required": [
+                    "deviceType",
+                    "id",
+                    "productName",
+                    "segment"
+                ]
+            }
+        },
+        "securitySchemes": {
+            "AirthingsAccounts": {
+                "flows": {
+                    "clientCredentials": {
+                        "tokenUrl": "https://accounts-api.airthings.com/v1/token",
+                        "scopes": {
+                            "read:device:current_values": "Allowing a user to read current data from devices in their account"
+                        }
+                    }
+                },
+                "type": "oauth2"
+            }
+        }
+    },
+    "security": [
+    ],
+    "tags": [
+        {
+            "name": "Devices"
+        },
+        {
+            "name": "Locations"
+        }
+    ]
+}
