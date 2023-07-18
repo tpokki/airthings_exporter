@@ -1,8 +1,25 @@
 services:
+  airthings_exporter:
+    build: ../
+    command:
+      - --airthings.cloud.auth.client.id=${CLIENT_ID}
+      - --airthings.cloud.auth.client.secret=${CLIENT_SECRET}
+    ports:
+      - "9101:9101"
   grafana:
     image: grafana/grafana:9.5.6-ubuntu
     ports:
       - "3000:3000"
+    volumes:
+      - ./data/grafana:/var/lib/grafana
   prometheus:
     image: prom/prometheus:v2.45.0
-  
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --log.level=error
+      - --storage.tsdb.path=/prometheus
+      - --web.console.libraries=/usr/share/prometheus/console_libraries
+      - --web.console.templates=/usr/share/prometheus/consoles
+    volumes:
+      - ./config/prometheus.yaml:/etc/prometheus/prometheus.yml
+      - ./data/prometheus:/prometheus
