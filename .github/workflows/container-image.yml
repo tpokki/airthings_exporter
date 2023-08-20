@@ -4,8 +4,10 @@ on:
   push:
 
 jobs:
-  buildx:
+  container:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       -
         name: Checkout
